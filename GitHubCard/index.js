@@ -121,18 +121,19 @@ const cardMaker = ({obj}) => {
   return cards
 }
 
-const result = axios.get(`https://api.github.com/users/Chantz-J`)
-    result.then(res => {
-      res.data.forEach(x => {
-        cardMaker(x)
-      })
+const cardCreater = (gitUser) => {
+  axios.get(`https://api.github.com/users/${gitUser}`)
+    .then(res => {
+      return res.data
     })
-    result.catch(err => {
+    .catch(err => {
       console.log(`RETURNED ERROR: ${err}`)
     })
-    result.then(() => {
+    .then(() => {
       console.log(`Fetched!`)
     })
+}
+cardCreater("Chantz-J")
 
     
     
