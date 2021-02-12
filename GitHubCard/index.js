@@ -75,63 +75,114 @@ const followersArray = [];
     bigknell
 */
 
-const cardMaker = ({obj}) => {
+// const cardMaker = ({obj}) => {
   //Create instances of elements
-  const card = document.createElement('div')
+  // const card = document.createElement('div')
 
-  const cardImg = document.createElement('img')
+  // const cardImg = document.createElement('img')
 
-  const cardInfo = document.createElement('div')
-  const cardName = document.createElement('h3')
-  const username = document.createElement('p')
-  const location = document.createElement('p')
+  // const cardInfo = document.createElement('div')
+  // const cardName = document.createElement('h3')
+  // const username = document.createElement('p')
+  // const location = document.createElement('p')
 
-  const profile = document.createElement('p')
-  const URL = document.createElement('a')
+  // const profile = document.createElement('p')
+  // const URL = document.createElement('a')
 
-  const followers = document.createElement('p')
-  const following = document.createElement('p')
-  const bio = document.createElement('p')
+  // const followers = document.createElement('p')
+  // const following = document.createElement('p')
+  // const bio = document.createElement('p')
 
-  //Create the tree
-  card.appendChild(cardImg)
-  card.appendChild(cardInfo)
+  // //Create the tree
+  // card.appendChild(cardImg)
+  // card.appendChild(cardInfo)
 
-  cardInfo.appendChild(cardName)
-  cardInfo.appendChild(username)
-  cardInfo.appendChild(location)
-  cardInfo.appendChild(profile)
+  // cardInfo.appendChild(cardName)
+  // cardInfo.appendChild(username)
+  // cardInfo.appendChild(location)
+  // cardInfo.appendChild(profile)
 
-  profile.appendChild(URL)
+  // profile.appendChild(URL)
 
-  cardInfo.appendChild(followers)
-  cardInfo.appendChild(following)
-  cardInfo.appendChild(bio)
+  // cardInfo.appendChild(followers)
+  // cardInfo.appendChild(following)
+  // cardInfo.appendChild(bio)
 
-  cards.appendChild(card)
+  // cards.appendChild(card)
  
 
-  //Set classes for elements
-  card.className = 'card'
-  cardInfo.className = 'card-info'
-  cardName.className = 'name'
-  username.className = 'username'
+  // //Set classes for elements
+  // card.className = 'card'
+  // cardInfo.className = 'card-info'
+  // cardName.className = 'name'
+  // username.className = 'username'
 
-  cardImg.src = `${obj[`avatar_url`]}`
-  return cards
-}
+  
+// }
 
 const cardCreater = (gitUser) => {
   axios.get(`https://api.github.com/users/${gitUser}`)
     .then(res => {
-      return res.data
-    })
-    .catch(err => {
-      console.log(`RETURNED ERROR: ${err}`)
-    })
-    .then(() => {
-      console.log(`Fetched!`)
-    })
+      // return res.data
+    const card = document.createElement('div')
+
+    const cardImg = document.createElement('img')
+
+    const cardInfo = document.createElement('div')
+    const cardName = document.createElement('h3')
+    const username = document.createElement('p')
+    const location = document.createElement('p')
+
+    const profile = document.createElement('p')
+    const URL = document.createElement('a')
+
+    const followers = document.createElement('p')
+    const following = document.createElement('p')
+    const bio = document.createElement('p')
+
+    //Create the tree
+    card.appendChild(cardImg)
+    card.appendChild(cardInfo)
+
+    cardInfo.appendChild(cardName)
+    cardInfo.appendChild(username)
+    cardInfo.appendChild(location)
+    cardInfo.appendChild(profile)
+
+    profile.appendChild(URL)
+
+    cardInfo.appendChild(followers)
+    cardInfo.appendChild(following)
+    cardInfo.appendChild(bio)
+
+    cards.appendChild(card)
+  
+
+    //Set classes for elements
+    card.className = 'card'
+    cardInfo.className = 'card-info'
+    cardName.className = 'name'
+    username.className = 'username'
+
+    cardImg.src = res.data['avatar_url']
+    cardName.textContent = res.data.name
+    username.textContent = res.data.login
+    location.textContent = `Location: ${res.data.location}`
+    profile.textContent = `Profile: ${res.data['html_url']}`
+    followers.textContent = `Followers: ${res.data.followers}`
+    following.textContent =  `Following: ${res.data.following}`
+
+    bio.textContent = `Bio: ${res.data.bio}`
+    
+
+
+      })
+      .catch(err => {
+        console.log(`RETURNED ERROR: ${err}`)
+      })
+      .then(() => {
+        console.log(`Fetched!`)
+      })
 }
 cardCreater("Chantz-J")
 
