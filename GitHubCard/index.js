@@ -1,8 +1,20 @@
+import axios from 'axios'
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+// const result = axios.get(`https://api.github.com/users/Chantz-J`)
+//     result.then(res => {
+//       console.log(res.data)
+//     })
+//     result.catch(err => {
+//       console.log(`RETURNED ERROR: ${err}`)
+//     })
+//     result.then(() => {
+//       console.log(`Fetched!`)
+//     })
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -15,7 +27,10 @@
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
+  
 */
+const cards = document.querySelector('.cards')
+
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -33,6 +48,7 @@ const followersArray = [];
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
+
 
     <div class="card">
       <img src={image url of user} />
@@ -58,3 +74,123 @@ const followersArray = [];
     luishrd
     bigknell
 */
+
+// const cardMaker = ({obj}) => {
+  //Create instances of elements
+  // const card = document.createElement('div')
+
+  // const cardImg = document.createElement('img')
+
+  // const cardInfo = document.createElement('div')
+  // const cardName = document.createElement('h3')
+  // const username = document.createElement('p')
+  // const location = document.createElement('p')
+
+  // const profile = document.createElement('p')
+  // const URL = document.createElement('a')
+
+  // const followers = document.createElement('p')
+  // const following = document.createElement('p')
+  // const bio = document.createElement('p')
+
+  // //Create the tree
+  // card.appendChild(cardImg)
+  // card.appendChild(cardInfo)
+
+  // cardInfo.appendChild(cardName)
+  // cardInfo.appendChild(username)
+  // cardInfo.appendChild(location)
+  // cardInfo.appendChild(profile)
+
+  // profile.appendChild(URL)
+
+  // cardInfo.appendChild(followers)
+  // cardInfo.appendChild(following)
+  // cardInfo.appendChild(bio)
+
+  // cards.appendChild(card)
+ 
+
+  // //Set classes for elements
+  // card.className = 'card'
+  // cardInfo.className = 'card-info'
+  // cardName.className = 'name'
+  // username.className = 'username'
+
+  
+// }
+
+const cardCreater = (gitUser) => {
+  axios.get(`https://api.github.com/users/${gitUser}`)
+    .then(res => {
+      // return res.data
+    const card = document.createElement('div')
+
+    const cardImg = document.createElement('img')
+
+    const cardInfo = document.createElement('div')
+    const cardName = document.createElement('h3')
+    const username = document.createElement('p')
+    const location = document.createElement('p')
+
+    const profile = document.createElement('p')
+    const URL = document.createElement('a')
+
+    const followers = document.createElement('p')
+    const following = document.createElement('p')
+    const bio = document.createElement('p')
+
+    //Create the tree
+    card.appendChild(cardImg)
+    card.appendChild(cardInfo)
+
+    cardInfo.appendChild(cardName)
+    cardInfo.appendChild(username)
+    cardInfo.appendChild(location)
+    cardInfo.appendChild(profile)
+
+    profile.appendChild(URL)
+
+    cardInfo.appendChild(followers)
+    cardInfo.appendChild(following)
+    cardInfo.appendChild(bio)
+
+    cards.appendChild(card)
+  
+
+    //Set classes for elements
+    card.className = 'card'
+    cardInfo.className = 'card-info'
+    cardName.className = 'name'
+    username.className = 'username'
+
+    cardImg.src = res.data['avatar_url']
+    cardName.textContent = res.data.name
+    username.textContent = res.data.login
+    location.textContent = `Location: ${res.data.location}`
+    profile.textContent = `Profile: ${res.data['html_url']}`
+    followers.textContent = `Followers: ${res.data.followers}`
+    following.textContent =  `Following: ${res.data.following}`
+
+    bio.textContent = `Bio: ${res.data.bio}`
+    
+
+
+      })
+      .catch(err => {
+        console.log(`RETURNED ERROR: ${err}`)
+      })
+      .then(() => {
+        console.log(`Fetched!`)
+      })
+}
+cardCreater("Chantz-J")
+
+    
+    
+  
+  
+  
+
+
+
